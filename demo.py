@@ -56,8 +56,10 @@ def make_pred(data):
     svc_rbf = svm.SVC(kernel = 'rbf')
     svc_rbf.fit(X_train_std, y_train)
 
+    #standardize input data
+    std_data = sc.transform(data)
     #model is ready for predicitions
-    return(svc_rbf.predict(data)[0])
+    return(svc_rbf.predict(std_data)[0])
 
 def main():
 
@@ -98,11 +100,8 @@ def main():
     test9.append(float(input())) 
     print("Does the patient smoke? Enter 1 for yes 0 for no:")
     test10.append(float(input()))
-    # df = pd.DataFrame( list(zip(test,test1,test2,test3,test4,test5,test6,test7,test8,test9,test10,test11)),
-    #                     columns=['age', 'anaemia',	'creatinine_phosphokinase',	'diabetes',	'ejection_fraction',	'high_blood_pressure',	'platelets',	'serum_creatinine',	'serum_sodium',	'sex',	'smoking'])
-
-    df = pd.DataFrame( list(zip(test,test1,test2,test3,test4,test5,test6,test7,test8,test9,test10)))
     
+    df = pd.DataFrame( list(zip(test,test1,test2,test3,test4,test5,test6,test7,test8,test9,test10)))
     pred = make_pred(df)
 
     app = QApplication(sys.argv)
