@@ -1,0 +1,10 @@
+TO RUN THE DEMO:
+python demo.py
+You will receive 11 probmpts in the CLI, for each one answer accordingly.
+Once that is done you should get a popup with your results.
+
+DEPENDENCIES:
+PyQt5
+joblib
+sklearn.preprocessing
+sklearn.model_selection

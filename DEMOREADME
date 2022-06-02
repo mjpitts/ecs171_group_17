@@ -1,1 +1,0 @@
-For the demo, make sure that you have PyQt5 installed. Then run the demo file: python demo.py. You will receive 11 probmpts in the CLI, for each one answer accorsingly. Once that is done you should get a popup with your results.   
