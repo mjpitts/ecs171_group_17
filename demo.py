@@ -2,14 +2,14 @@ from cProfile import label
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QFont
+
+from joblib import load
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from sklearn import svm
+#from sklearn import svm
 from sklearn.model_selection import train_test_split
+
 import sys
-
-
-
 
 def make_pred(data):
     #input vector = age	anaemia	creatinine_phosphokinase	diabetes	ejection_fraction	high_blood_pressure	platelets	serum_creatinine	serum_sodium  sex	smoking
@@ -52,9 +52,8 @@ def make_pred(data):
     X_train_std = sc.transform(X_svm_train)
     X_test_std = sc.transform(X_svm_test)
 
-    #fit model
-    svc_rbf = svm.SVC(kernel = 'rbf')
-    svc_rbf.fit(X_train_std, y_train)
+    # load SVM model exported from notebook
+    svc_rbf = load("svc_rbf.joblib")
 
     #standardize input data
     std_data = sc.transform(data)
@@ -76,13 +75,13 @@ def main():
     test10 = []
 
 
-    print("Enter patient's full name, first last:")
+    print("Enter patient's full name (first last):")
     name = input()
     print("Enter patient's age:")
     test.append(float(input()))
-    print("Does the patient have animia? Enter 1 for yes 0 for no:")
+    print("Does the patient have anemia? Enter 1 for yes 0 for no:")
     test1.append(float(input()))
-    print("Please enter patient's creatineine phosphokinase levels:")
+    print("Please enter patient's creatinine phosphokinase levels:")
     test2.append(float(input()))
     print("Does the patient have diabetes? Enter 1 for yes 0 for no:")
     test3.append(float(input())) 
@@ -92,7 +91,7 @@ def main():
     test5.append(float(input()))
     print("Please enter patient's platelet levels:")
     test6.append(float(input()))
-    print("Please enter patient's serum creatineine levels:")
+    print("Please enter patient's serum creatinine levels:")
     test7.append(float(input()))
     print("Please enter patient's serum sodium levels:")
     test8.append(float(input()))
@@ -233,4 +232,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+
